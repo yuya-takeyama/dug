@@ -1,7 +1,7 @@
 /* Author: Yuya Takeyama
 
 */
-(function (window) {
+; (function (window) {
   window.loopWithInterval = function (arr, interval, callback) {
     var callbacks = Array.prototype.reduce.call(arr, function (sum, elem) {
       var i = sum.length;
@@ -17,7 +17,7 @@
   };
 })(window);
 
-; (function (window, document, undefined) {
+(function (window, document, undefined) {
   // ViewModel of #output_area
   var OutputArea = function ($outputArea) {
     this.$ = $outputArea;
@@ -36,19 +36,39 @@
     };
   })(OutputArea);
 
+  // Output Formatters
+  var AbstractFormatter = function (output) {
+    this.output = output;
+  };
+  (function (o) {
+    o.print = function (text) {
+      this.output.print(text);
+    };
+
+    o.puts = function (text) {
+      this.output.puts(text);
+    };
+  })(AbstractFormatter.prototype);
+
+  var OnlyUrlFormatter = function (output) {
+    this.output = output;
+  };
+  OnlyUrlFormatter.prototype = new AbstractFormatter;
+  (function (o, a) {
+    o.onFileGiven = function (file, uri) {
+      this.puts(uri);
+    };
+  })(OnlyUrlFormatter.prototype);
+
   // Entry point
   window.jQuery(document).ready(function () {
     var $          = window.jQuery
       , outputArea = new OutputArea($('#output_area'))
-      , reader     = new window.FileReader
       , forEach    = Array.prototype.forEach
       , map        = Array.prototype.map
       , reduce     = Array.prototype.reduce
-      , $ddBox     = $('#dd_box');
-
-    reader.onloadend = function (event) {
-      outputArea.puts(event.srcElement.result);
-    };
+      , $ddBox     = $('#dd_box')
+      , formatter  = new OnlyUrlFormatter(outputArea);
 
     $.event.props.push('dataTransfer');
 
@@ -59,6 +79,10 @@
 
       var files = event.dataTransfer.files;
       loopWithInterval(files, 50, function (file, i) {
+        var reader = new window.FileReader;
+        reader.onload = function (event) {
+          formatter.onFileGiven(file, event.srcElement.result);
+        };
         reader.readAsDataURL(file)
       });
 

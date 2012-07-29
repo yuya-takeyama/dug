@@ -43,7 +43,8 @@
       , reader     = new window.FileReader
       , forEach    = Array.prototype.forEach
       , map        = Array.prototype.map
-      , reduce     = Array.prototype.reduce;
+      , reduce     = Array.prototype.reduce
+      , $ddBox     = $('#dd_box');
 
     reader.onloadend = function (event) {
       outputArea.puts(event.srcElement.result);
@@ -51,16 +52,25 @@
 
     $.event.props.push('dataTransfer');
 
-    $('#dd_box').on('drop', function (event) {
+    $ddBox.on('drop', function (event) {
       event.stopPropagation();
       event.preventDefault();
       outputArea.clear();
 
       var files = event.dataTransfer.files;
       loopWithInterval(files, 50, function (file, i) {
-        console.log(i + ': ' + file.name);
         reader.readAsDataURL(file)
       });
+
+      $ddBox.removeClass('dragging');
+    });
+
+    $ddBox.on('dragenter', function () {
+      $ddBox.addClass('dragging');
+    });
+
+    $ddBox.on('dragleave', function () {
+      $ddBox.removeClass('dragging');
     });
   });
 })(window, document, undefined);

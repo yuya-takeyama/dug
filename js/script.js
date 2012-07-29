@@ -64,9 +64,6 @@
   window.jQuery(document).ready(function () {
     var $          = window.jQuery
       , outputArea = new OutputArea($('#output_area'))
-      , forEach    = Array.prototype.forEach
-      , map        = Array.prototype.map
-      , reduce     = Array.prototype.reduce
       , $ddBox     = $('#dd_box')
       , formatter  = new OnlyUrlFormatter(outputArea);
 

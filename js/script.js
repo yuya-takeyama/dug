@@ -24,15 +24,15 @@
   };
   (function (o) {
     o.prototype.print = function (text) {
-      this.$.val(this.$.val() + text);
+      this.$.append(text);
     };
 
     o.prototype.puts = function (text) {
-      this.print(text + "\n");
+      this.print(text + "<br>");
     };
 
     o.prototype.clear = function () {
-      this.$.val('');
+      this.$.text('');
     };
   })(OutputArea);
 

@@ -1,23 +1,7 @@
 /* Author: Yuya Takeyama
 
 */
-; (function (window) {
-  window.loopWithInterval = function (arr, interval, callback) {
-    var callbacks = Array.prototype.reduce.call(arr, function (sum, elem) {
-      var i = sum.length;
-      sum.push(function () {
-        callback(elem, i, arr);
-      });
-      return sum;
-    }, []);
-    var intervalId = window.setInterval(function () {
-      var f = callbacks.shift();
-      f ? f() : window.clearInterval(intervalId);
-    }, interval);
-  };
-})(window);
-
-(function (window, document, undefined) {
+; (function (window, document, undefined) {
   // ViewModel of #output_area
   var OutputArea = function ($outputArea) {
     this.$ = $outputArea;
@@ -65,7 +49,8 @@
     var $          = window.jQuery
       , outputArea = new OutputArea($('#output_area'))
       , $ddBox     = $('#dd_box')
-      , formatter  = new OnlyUrlFormatter(outputArea);
+      , formatter  = new OnlyUrlFormatter(outputArea)
+      , forEach    = Array.prototype.forEach;
 
     $.event.props.push('dataTransfer');
 
@@ -75,7 +60,7 @@
       outputArea.clear();
 
       var files = event.dataTransfer.files;
-      loopWithInterval(files, 50, function (file, i) {
+      forEach.call(files, function (file, i) {
         var reader = new window.FileReader;
         reader.onload = function (event) {
           formatter.onFileGiven(file, event.srcElement.result);

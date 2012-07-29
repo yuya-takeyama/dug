@@ -1,8 +1,8 @@
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>  <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>  <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="ja"> <![endif]-->
+<!--[if IE 7]>  <html class="no-js lt-ie9 lt-ie8" lang="ja"> <![endif]-->
+<!--[if IE 8]>  <html class="no-js lt-ie9" lang="ja"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,12 +13,31 @@
 
   <meta name="viewport" content="width=device-width">
 
+  <meta property="fb:admins" content="100000987494966">
+  <meta property="fb:app_id" content="175678489223903">
+  <meta property="og:url" content="http://yuya-takeyama.github.com/data-uri-scheme-generator">
+  <meta property="og:title" content="Data URI Scheme Generator">
+  <meta property="og:site_name" content="Data URI Scheme Generator">
+  <meta property="og:description" content="Generates data URI scheme by Drop &amp; Drop images.">
+  <meta property="og:type" content="website">
+
   <link rel="stylesheet/less" href="less/style.less">
   <script src="js/libs/less-1.3.0.min.js"></script>
 
   <script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=175678489223903";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
     <div class="container">
@@ -59,6 +78,11 @@
     <hr>
 
     <footer>
+    <div>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-dnt="true">ツイート</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      <div class="fb-like" data-href="http://yuya-takeyama.github.com/data-uri-scheme-generator" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+    </div>
     <p>&copy; Yuya Takeyama 2012</p>
     </footer>
 
